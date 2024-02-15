@@ -1,0 +1,4 @@
+App\Form\Model\CategoryDto:
+    properties:
+        name:
+            - NotBlank: ~

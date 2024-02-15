@@ -1,0 +1,4 @@
+App\Form\Model\BookDto:
+    properties:
+        title:
+            - NotBlank: ~

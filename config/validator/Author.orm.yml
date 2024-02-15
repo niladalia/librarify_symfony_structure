@@ -1,0 +1,33 @@
+App\Entity\Author:
+    type: entity
+    table: author
+    repositoryClass: App\Repository\AuthorRepository
+    id:
+        id:
+            type: string
+            scale: null
+            length: null
+            unique: false
+            nullable: false
+            precision: null
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            scale: null
+            length: 255
+            unique: false
+            nullable: true
+            precision: null
+    oneToMany:
+        books:
+            targetEntity: App\Entity\Book
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: author
+            inversedBy: null
+            orphanRemoval: false
+            orderBy: null
+    lifecycleCallbacks: {  }
