@@ -21,22 +21,15 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class BookCreator
 {
-    private $fileUploader;
-    private $em;
-    private $formFactory;
-    private $book_rep;
-    private $updateBookAuthor;
-    private $eventDispatcher;
+
     public function __construct(
-        EntityManagerInterface $em,
-        FileUploaderInterface $fileUploader,
-        FormFactoryInterface $formFactory,
-        BookRepository $book_rep,
-        UpdateBookAuthor $updateBookAuthor,
-        EventDispatcherInterface $eventDispatcher
+        private FileUploaderInterface $fileUploader,
+        private FormFactoryInterface $formFactory,
+        private BookRepository $book_rep,
+        private UpdateBookAuthor $updateBookAuthor,
+        private EventDispatcherInterface $eventDispatcher
     ) {
         $this->fileUploader = $fileUploader;
-        $this->em = $em;
         $this->formFactory = $formFactory;
         $this->book_rep = $book_rep;
         $this->updateBookAuthor = $updateBookAuthor;
