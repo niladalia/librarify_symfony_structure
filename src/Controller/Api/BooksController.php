@@ -30,7 +30,7 @@ class BooksController extends AbstractController
      aquí ho estic transformant JO a JSON. Pero de moment ho deixem així,  no es important
     */
 
-    public function get(GetBook $getBook,?string $id = null): Response
+    public function get(GetBook $getBook, ?string $id = null): Response
     {
         $books = [];
 
@@ -59,8 +59,8 @@ class BooksController extends AbstractController
         return $this->json(data: $this->book_rep->returnBookSerialized($book), status : 200);
     }
 
-    public function put(Request $request,string $id,BookEditor $bookEditor) {
-        
+    public function put(Request $request, string $id, BookEditor $bookEditor)
+    {
         [$book,$error] = ($bookEditor)($request, $id);
 
         if (!$error) {
@@ -71,9 +71,9 @@ class BooksController extends AbstractController
         return $response;
     }
 
-    public function patch(string $id,Request $request,BookFieldUpdater $bookFieldUpdater){
-        
-        $book = $bookFieldUpdater($request,$id);
+    public function patch(string $id, Request $request, BookFieldUpdater $bookFieldUpdater)
+    {
+        $book = $bookFieldUpdater($request, $id);
         return $this->json($this->book_rep->returnBookSerialized($book), status : 200);
     }
 

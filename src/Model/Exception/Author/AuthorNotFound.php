@@ -10,7 +10,8 @@ class AuthorNotFound extends DomainException
     {
         throw new self("Author {$id} not found");
     }
-    public function getStatusCode(){
+    public function getStatusCode()
+    {
         return 400;
     }
 }

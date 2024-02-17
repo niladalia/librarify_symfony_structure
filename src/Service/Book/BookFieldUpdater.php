@@ -30,8 +30,8 @@ class BookFieldUpdater
     public function __invoke(Request $request, string $id): Book
     {
         $book = ($this->getBook)($id);
-        $data = json_decode($request->getContent(),true);
-        
+        $data = json_decode($request->getContent(), true);
+
         if (\array_key_exists('score', $data)) {
             $book->setScore(new Score($data['score']));
         }
@@ -42,10 +42,10 @@ class BookFieldUpdater
             $book->setDescription(new Description($data['description']));
         }
         if (\array_key_exists('author_id', $data)) {
-            $new_author = ($this->updateBookAuthor)($data['author_id'],$book);
+            $new_author = ($this->updateBookAuthor)($data['author_id'], $book);
             $new_author ? $book->setAuthor($new_author) : null;
         }
-        $book = $this->book_rep->save($book);        
+        $book = $this->book_rep->save($book);
         return $book;
     }
 

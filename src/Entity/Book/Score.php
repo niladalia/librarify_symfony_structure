@@ -9,8 +9,8 @@ use InvalidArgumentException;
 
 final class Score extends IntValueObject
 {
-    
-    protected function validate() {
+    protected function validate()
+    {
         if ($this->value === null) {
             return null;
         }
@@ -18,5 +18,4 @@ final class Score extends IntValueObject
             InvalidArgument::throw('El score tiene que estar entre 0 y 5');
         }
     }
-
 }

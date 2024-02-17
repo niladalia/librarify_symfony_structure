@@ -11,7 +11,8 @@ class InvalidArgument extends DomainException
         throw new self($message);
     }
 
-    public function getStatusCode(){
+    public function getStatusCode()
+    {
         return 400;
     }
 }

@@ -30,6 +30,5 @@ class AuthorController extends AbstractController
         $params = json_decode($request->getContent(), true);
         $author = $author_creator($params);
         return $this->json($author, status: 200);
-
     }
 }

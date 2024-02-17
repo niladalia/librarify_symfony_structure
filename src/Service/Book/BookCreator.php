@@ -71,14 +71,14 @@ class BookCreator
         $form->handleRequest($request);
 
         if (!$form->isSubmitted() && !$form->isValid()) {
-            throw new HttpException(400,'Object is not valid');
+            throw new HttpException(400, 'Object is not valid');
         }
 
         $author = ($this->updateBookAuthor)($bookDto->author_id);
         $filename = $bookDto->base64Image ? $this->fileUploader->uploadFile($bookDto) : null;
 
         if ($bookDto->base64Image) {
-            $filename = $this->fileUploader->uploadFile($bookDto);                
+            $filename = $this->fileUploader->uploadFile($bookDto);
         }
 
         $book = Book::create(

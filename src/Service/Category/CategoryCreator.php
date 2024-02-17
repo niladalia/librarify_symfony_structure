@@ -27,7 +27,7 @@ class CategoryCreator
         $errors = $this->validator->validate($category);
         if (count($errors) > 0) {
             $validation_errors = (string) $errors;
-            throw new HttpException(400,$validation_errors);
+            throw new HttpException(400, $validation_errors);
         }
         $this->category_rep->save($category);
 

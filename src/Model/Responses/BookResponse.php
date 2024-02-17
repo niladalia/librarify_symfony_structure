@@ -8,16 +8,13 @@ use App\Entity\Book;
 
 final readonly class BookResponse
 {
-
-	public function __construct(private array $books) {
-
-    }
+    public function __construct(private array $books) {}
 
     public function books(): array
     {
         $books_array = [];
         foreach ($this->books as $book) {
-            $books_array[] = 
+            $books_array[] =
             [
                 'id' => $book->getId(),
                 'name' => $book->getTitle(),

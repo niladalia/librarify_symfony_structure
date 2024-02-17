@@ -11,7 +11,6 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class ApiExceptionListener
 {
-
     public function onKernelException(ExceptionEvent $event)
     {
         $exception = $event->getThrowable();
@@ -20,13 +19,12 @@ class ApiExceptionListener
             Response::HTTP_INTERNAL_SERVER_ERROR;
         }
         $code = null;
-        if ($exception instanceof HttpExceptionInterface || $exception instanceof DomainException ){
+        if ($exception instanceof HttpExceptionInterface || $exception instanceof DomainException) {
             $code = $exception->getStatusCode();
-        }
-        else{
+        } else {
             $code = 500;
         }
-        
+
         #$code = $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : 500;
 
         $responseData = [
@@ -38,5 +36,4 @@ class ApiExceptionListener
 
         $event->setResponse(new JsonResponse($responseData, $code));
     }
-
 }

@@ -9,13 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class IsbnController extends AbstractController
 {
-
-    public function get(Request $request,GetBookInfoByIsbn $getIsbn): Response
+    public function get(Request $request, GetBookInfoByIsbn $getIsbn): Response
     {
         $isbn = $request->get('isbn', null);
         $data = $getIsbn($isbn);
         return $this->json($data);
     }
-
-    
 }
