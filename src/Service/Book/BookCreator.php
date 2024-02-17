@@ -23,7 +23,6 @@ class BookCreator
 {
 
     public function __construct(
-        private EntityManagerInterface $em,
         private FileUploaderInterface $fileUploader,
         private FormFactoryInterface $formFactory,
         private BookRepository $book_rep,
@@ -31,7 +30,6 @@ class BookCreator
         private EventDispatcherInterface $eventDispatcher
     ) {
         $this->fileUploader = $fileUploader;
-        $this->em = $em;
         $this->formFactory = $formFactory;
         $this->book_rep = $book_rep;
         $this->updateBookAuthor = $updateBookAuthor;
