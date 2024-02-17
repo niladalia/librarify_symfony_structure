@@ -10,7 +10,8 @@ class CategoryNotFound extends DomainException
     {
         throw new self("Category {$id} not found");
     }
-    public function getStatusCode(){
+    public function getStatusCode()
+    {
         return 400;
     }
 }

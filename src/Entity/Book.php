@@ -41,11 +41,11 @@ class Book
     private ?Author $author = null;
 
     public function __construct(
-        UuidInterface $uuid, 
-        Title $title, 
+        UuidInterface $uuid,
+        Title $title,
         ?string $image,
-        ?Author $author, 
-        ?Description $description =  new Description(), 
+        ?Author $author,
+        ?Description $description =  new Description(),
         ?Score $score = new Score()
     ) {
         $this->id = $uuid;
@@ -55,7 +55,6 @@ class Book
         $this->description = $description;
         $this->score = $score;
         $this->categories = new ArrayCollection();
-
     }
 
     public static function create(
@@ -77,14 +76,14 @@ class Book
         $book->addDomainEvent(new BookCreatedDomainEvent($book->getId()));
         return $book;
     }
-    
+
     public function update(
         ?Title $title,
         ?string $filename,
         ?Author $author,
         ?Description $description,
         ?Score $score
-    ){
+    ) {
         $this->title = $title;
         $filename ? $this->image = $filename : null;
         $this->description = $description;
@@ -177,9 +176,9 @@ class Book
 
         return $this;
     }
-    
-    public function setScore(?Score $score){
 
+    public function setScore(?Score $score)
+    {
         $this->score = $score;
 
         return $this;
@@ -196,12 +195,10 @@ class Book
     }
 
 
-    public function setDescription(?Description $description){
-
+    public function setDescription(?Description $description)
+    {
         $this->description = $description;
 
         return $this;
     }
-
-    
 }

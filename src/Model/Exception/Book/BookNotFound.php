@@ -10,7 +10,8 @@ class BookNotFound extends DomainException
     {
         throw new self("Book {$id} not found");
     }
-    public function getStatusCode(){
+    public function getStatusCode()
+    {
         return 400;
     }
 }

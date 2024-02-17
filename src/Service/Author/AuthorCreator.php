@@ -28,10 +28,10 @@ class AuthorCreator
         $errors = $this->validator->validate($author);
         if (count($errors) > 0) {
             $validation_errors = (string) $errors;
-            throw new HttpException(400,$validation_errors);
+            throw new HttpException(400, $validation_errors);
         }
         $author = $this->author_rep->save($author);
-        
+
         return $author;
     }
 }

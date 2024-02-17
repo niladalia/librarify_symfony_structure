@@ -15,7 +15,7 @@ class UpdateBookAuthor
 {
     private $authorRepository;
     private $getAuthor;
-    public function __construct(AuthorRepository $authorRepository,GetAuthor $getAuthor)
+    public function __construct(AuthorRepository $authorRepository, GetAuthor $getAuthor)
     {
         $this->authorRepository = $authorRepository;
         $this->getAuthor = $getAuthor;
@@ -25,12 +25,12 @@ class UpdateBookAuthor
     public function __invoke(string $newAuthorId, ?Book $book = null): ?Author
     {
         $existingAuthorId = null;
-        
-        if($book){
+
+        if ($book) {
             $existingAuthor = $book->getAuthor();
             $existingAuthorId = $existingAuthor ? $existingAuthor->getId() : null;
         }
-        
+
         if ($newAuthorId != $existingAuthorId) {
             // If the client hasn't selected any author, unlink it from the book; otherwise, assign it
             if (!$newAuthorId) {

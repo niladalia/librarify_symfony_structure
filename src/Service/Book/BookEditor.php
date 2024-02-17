@@ -50,7 +50,7 @@ class BookEditor
     public function __invoke(Request $request, string $id): array
     {
         $book = ($this->getBook)($id);
-        
+
         $bookDto = BookDto::createFromBook($book);
 
         $original_categories_dto = new ArrayCollection();
@@ -82,7 +82,7 @@ class BookEditor
 
 
         */
-        $content = json_decode($request->getContent(),true);
+        $content = json_decode($request->getContent(), true);
         $form = $this->formFactory->create(BookFormType::class, $bookDto);
         $form->submit($content);
 
@@ -93,9 +93,9 @@ class BookEditor
             return [null, "Data is not valid"];
         }
 
-        ($this->updateBookCategory)($original_categories_dto,$bookDto,$book);
-        $new_author = ($this->updateBookAuthor)($bookDto->author_id,$book);
-        
+        ($this->updateBookCategory)($original_categories_dto, $bookDto, $book);
+        $new_author = ($this->updateBookAuthor)($bookDto->author_id, $book);
+
         $book->update(
             new Title($bookDto->title),
             $bookDto->base64Image ? $this->fileUploader->uploadFile($bookDto) : null,

@@ -41,7 +41,7 @@ class BookRepository extends ServiceEntityRepository
     {
         $categories_array = $this->getCategoriesSerialized($book);
         $author = $this->getAuthorSerialized($book);
-        return [    
+        return [
              'id' => $book->getId(),
              'title' => $book->getTitle()->getValue(),
              'score' => $book->getScore()->getValue(),
