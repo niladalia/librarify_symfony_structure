@@ -18,13 +18,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DeleteBook
 {
-    private $em;
-    private $file_deleter;
-    private $getBook;
+
     public function __construct(
-        EntityManagerInterface $em,
-        DeleteFile $file_deleter,
-        GetBook $getBook
+        private EntityManagerInterface $em,
+        private DeleteFile $file_deleter,
+        private GetBook $getBook
     ) {
         $this->em = $em;
         $this->file_deleter = $file_deleter;
