@@ -3,18 +3,20 @@ version: '3'
 services:
     php:
         build:
-            context: ../
+            context: .
             dockerfile: .docker/php/Dockerfile
             args:
                 TIMEZONE: Europe/Madrid
+        volumes:
+            - ./librarify/:/var/www/librarify/
         networks:
             - symfony
-        environment:
-            - COMPOSER_ALLOW_SUPERUSER=1
     nginx:
         build:
-            context: ../
+            context: .
             dockerfile: .docker/nginx/Dockerfile
+        volumes:
+            - ./librarify/:/var/www/librarify/
         ports:
             - 81:80
         networks:
@@ -26,7 +28,7 @@ services:
             - "db_librarify:/var/lib/mysql"
         environment:
             MYSQL_ROOT_PASSWORD: chopin
-            MYSQL_DATABASE: librairfy
+            MYSQL_DATABASE: librarify
             MYSQL_USER: root
             MYSQL_PASSWORD: chopin
         ports:

@@ -15,14 +15,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 WORKDIR /var/www/librarify
 
-COPY . .
+#COPY . .
 
-RUN echo "Entrando en /var/www/librarify : "
-RUN ls
+#ENV COMPOSER_ALLOW_SUPERUSER=1
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
-
-RUN composer install 
-
+#RUN composer install 
 
 RUN ls
