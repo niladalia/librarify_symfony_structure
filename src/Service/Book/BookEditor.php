@@ -25,19 +25,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BookEditor
 {
-    private $book_rep;
-    private $formFactory;
-    private $fileUploader;
-    private $getBook;
-    private $updateBookCategory;
-    private $updateBookAuthor;
     public function __construct(
-        BookRepository $book_rep,
-        FormFactoryInterface $formFactory,
-        FileUploaderInterface $fileUploader,
-        GetBook $getBook,
-        UpdateBookCategory $updateBookCategory,
-        UpdateBookAuthor $updateBookAuthor
+        private BookRepository $book_rep,
+        private FormFactoryInterface $formFactory,
+        private FileUploaderInterface $fileUploader,
+        private GetBook $getBook,
+        private UpdateBookCategory $updateBookCategory,
+        private UpdateBookAuthor $updateBookAuthor
     ) {
         $this->book_rep = $book_rep;
         $this->formFactory = $formFactory;

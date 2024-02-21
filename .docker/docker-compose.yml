@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+    php:
+        build:
+            context: ../
+            dockerfile: .docker/php/Dockerfile
+            args:
+                TIMEZONE: Europe/Madrid
+        networks:
+            - symfony
+        environment:
+            - COMPOSER_ALLOW_SUPERUSER=1
+    nginx:
+        build:
+            context: ../
+            dockerfile: .docker/nginx/Dockerfile
+        ports:
+            - 81:80
+        networks:
+            - symfony
+    db:
+        image: mysql:8.0.20
+        command: --default-authentication-plugin=mysql_native_password
+        volumes:
+            - "db_librarify:/var/lib/mysql"
+        environment:
+            MYSQL_ROOT_PASSWORD: chopin
+            MYSQL_DATABASE: librairfy
+            MYSQL_USER: root
+            MYSQL_PASSWORD: chopin
+        ports:
+            - 3307:3306
+        networks:
+            - symfony
+
+volumes:
+    librarifyback_app_sync:
+        external: true
+    db_librarify:
+
+networks:
+    symfony:
