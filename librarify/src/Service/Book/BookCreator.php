@@ -11,9 +11,6 @@ use App\Form\Model\BookDto;
 use App\Repository\BookRepository;
 use App\Form\Type\BookFormType;
 use App\Interfaces\FileUploaderInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
-use stdClass;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -84,7 +81,7 @@ class BookCreator
         $this->book_rep->save($book);
 
         // Aquí llançem tots els events de domini que haguem creat en el domini.
-        #$this->eventDispatcher->dispatch(...$book->pullDomainEvents());
+        // $this->eventDispatcher->dispatch(...$book->pullDomainEvents());
         foreach ($book->pullDomainEvents() as $event) {
             $this->eventDispatcher->dispatch($event);
         }
