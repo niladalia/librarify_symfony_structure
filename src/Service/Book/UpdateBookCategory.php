@@ -33,14 +33,14 @@ class UpdateBookCategory
             }
         }
         // Creem la categoria si no existeix
-        foreach ($bookDto->categories as $new_category_dto) {
+        foreach ($bookDto->categories as $new_category) {
             $category = null;
-            if (!$original_categories_dto->contains($new_category_dto)) {
-                if ($new_category_dto->id != null) {
-                    $category = ($this->getCategory)($new_category_dto->id);
+            if (!$original_categories_dto->contains($new_category)) {
+                if ($new_category->id != null) {
+                    $category = ($this->getCategory)($new_category->id);
                 }
                 if (!$category) {
-                    $category = ($this->categoryCreator)($new_category_dto->name);
+                    $category = ($this->categoryCreator)($new_category);
                 }
                 $book->addCategory($category);
             }

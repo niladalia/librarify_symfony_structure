@@ -2,19 +2,9 @@
 
 namespace App\Service\Book;
 
-use App\Entity\Book;
-use App\Form\Model\BookDto;
 use App\Repository\BookRepository;
-use App\Form\Type\BookFormType;
-use App\Interfaces\FileUploaderInterface;
 use App\Model\Exception\Book\BookNotFound;
 use App\Service\DeleteFile;
-use App\Service\FileDeleter;
-use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DeleteBook
 {

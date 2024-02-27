@@ -4,6 +4,8 @@ namespace App\Service\Category;
 
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Entity\Category;
+use App\Entity\Category\CategoryName;
+use App\Form\Model\CategoryDto;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -20,15 +22,14 @@ class CategoryCreator
         $this->category_rep = $category_rep;
     }
 
-    public function __invoke(string $name): Category
+    public function __invoke(CategoryDto $categoryDto): Category
     {
-        $category = new Category(Uuid::uuid4());
-        $category->setName($name);
-        $errors = $this->validator->validate($category);
-        if (count($errors) > 0) {
-            $validation_errors = (string) $errors;
-            throw new HttpException(400, $validation_errors);
-        }
+        $category = new Category
+        (
+            Uuid::uuid4(),
+            new CategoryName($categoryDto->name)
+        );
+
         $this->category_rep->save($category);
 
         return $category;

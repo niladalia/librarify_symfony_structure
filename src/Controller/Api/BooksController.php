@@ -76,7 +76,8 @@ class BooksController extends AbstractController
 
     public function put(Request $request, string $id, BookEditor $bookEditor): JsonResponse
     {
-        $book = ($bookEditor)($request, $id);
+        $request_data = json_decode($request->getContent(), true);
+        $book = ($bookEditor)($request_data, $id);
 
         return new JsonResponse(
             $book->toArray()

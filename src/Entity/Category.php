@@ -3,10 +3,10 @@
 namespace App\Entity;
 
 use App\Entity\Book;
+use App\Entity\Category\CategoryName;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 
 /*
@@ -18,19 +18,16 @@ Podem crear un book i asignarlo directament a una categoria pero no podem crear 
 
 class Category
 {
-    private UuidInterface $id;
-
-
-    private string $name;
     /**
      * @var  Collection<int, Book>
     */
 
     private Collection $books;
 
-    public function __construct(UuidInterface $uuid)
+    public function __construct(private UuidInterface $id, private ?CategoryName $name = new CategoryName())
     {
-        $this->id = $uuid;
+        $this->id = $id;
+        $this->name = $name;
         $this->books = new ArrayCollection();
     }
 
@@ -39,12 +36,12 @@ class Category
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): ?CategoryName
     {
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(CategoryName $name): static
     {
         $this->name = $name;
 
@@ -82,7 +79,7 @@ class Category
     {
         return [
             'id' => $this->getId()->serialize(),
-            'name' => $this->getName(),
+            'name' => $this->getName()->getValue()
         ];
     }
 }

@@ -6,24 +6,14 @@ use App\Entity\Book;
 use App\Entity\Book\Description;
 use App\Entity\Book\Score;
 use App\Entity\Book\Title;
-use App\Entity\Category;
 use App\Form\Model\BookDto;
 use App\Form\Model\CategoryDto;
 use App\Repository\BookRepository;
 use App\Form\Type\BookFormType;
 use App\Interfaces\FileUploaderInterface;
 use App\Model\Exception\Generic\InvalidData;
-use App\Repository\AuthorRepository;
-use App\Repository\CategoryRepository;
-use App\Service\Category\CategoryCreator;
-use App\Service\Category\GetCategory;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
-use Symfony\Bundle\FrameworkBundle\Console\Descriptor\Descriptor;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BookEditor
 {
@@ -43,7 +33,7 @@ class BookEditor
         $this->updateBookAuthor = $updateBookAuthor;
     }
 
-    public function __invoke(Request $request, string $id): Book
+    public function __invoke(array $request_data, string $id): Book
     {
         $book = ($this->BookFinder)($id);
 
@@ -78,9 +68,9 @@ class BookEditor
 
 
         */
-        $content = json_decode($request->getContent(), true);
+
         $form = $this->formFactory->create(BookFormType::class, $bookDto);
-        $form->submit($content);
+        $form->submit($request_data);
 
         if (!$form->isSubmitted() || !$form->isValid()) {
             InvalidData::throw("Object is not valid");

@@ -3,7 +3,7 @@
   <entity repository-class="App\Repository\CategoryRepository" name="App\Entity\Category" table="category">
     <id name="id" column="id" type="uuid">
     </id>
-    <field name="name" type="string" column="name" length="255" nullable="false"/>
+    <embedded name="name" class="App\Entity\Category\CategoryName" use-column-prefix="false"/>
     <many-to-many field="books" target-entity="App\Entity\Book" mapped-by="categories" fetch="LAZY"/>
   </entity>
 </doctrine-mapping>
