@@ -1,6 +1,0 @@
-App\Entity\Book:
-    properties:
-        title:
-            - NotBlank: ~
-            - Length:
-                min: 3
