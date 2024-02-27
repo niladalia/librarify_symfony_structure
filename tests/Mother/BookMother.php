@@ -12,7 +12,8 @@ use Ramsey\Uuid\UuidInterface;
 
 final class BookMother
 {
-    public static function create(?UuidInterface $id = null,?Title $title = null): Book {
+    public static function create(?UuidInterface $id = null, ?Title $title = null): Book
+    {
         return new Book(
             $id ?? Uuid::uuid4(),
             $title ?? new Title(),
@@ -20,5 +21,4 @@ final class BookMother
             null
         );
     }
-
 }

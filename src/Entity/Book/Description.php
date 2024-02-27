@@ -27,6 +27,6 @@ final class Description extends StringValueObject
 
     public function update(Book $book): void
     {
-        $book->setDescription($this->value);
+        $book->setDescription($this);
     }
 }

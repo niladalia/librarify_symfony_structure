@@ -11,7 +11,7 @@ class BookCreatedEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(private BookFinder $BookFinder, private LoggerInterface $logger) {}
 
-    public static function getSubscribedEvents():array
+    public static function getSubscribedEvents(): array
     {
         return [
             BookCreatedDomainEvent::class => [

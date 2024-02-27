@@ -18,9 +18,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DeleteBook
 {
-
-    public function __construct
-    (
+    public function __construct(
         private BookRepository $bookRep,
         private DeleteFile $file_deleter,
         private BookFinder $BookFinder

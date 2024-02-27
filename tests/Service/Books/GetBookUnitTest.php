@@ -18,7 +18,7 @@ class BookFinderUnitTest extends KernelTestCase
 {
     private $bookRep;
     private $BookFinder;
-    
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -47,15 +47,13 @@ class BookFinderUnitTest extends KernelTestCase
     public function test_it_throws_exception_when_book_not_found()
     {
         $id_uuid = Uuid::uuid4();
-        
+
         $this->bookRep->expects(self::exactly(1))
             ->method('find')
             ->willReturn(null);
-        
+
         $this->expectException(BookNotFound::class);
-        
+
         ($this->BookFinder)($id_uuid->serialize());
-
     }
-
 }

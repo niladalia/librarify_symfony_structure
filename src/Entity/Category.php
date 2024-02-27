@@ -78,10 +78,10 @@ class Category
         return $this;
     }
 
-    public function toArray(){
-        
+    public function toArray()
+    {
         return [
-            'id' => $this->getId()->serialize(), 
+            'id' => $this->getId()->serialize(),
             'name' => $this->getName(),
         ];
     }

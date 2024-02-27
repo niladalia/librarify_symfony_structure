@@ -16,7 +16,7 @@ if ($_SERVER['APP_DEBUG']) {
 }
 
 $env = 'test';
- 
+
 passthru(
     sprintf(
         'php bin/console doctrine:database:drop --if-exists --force --env=%s',

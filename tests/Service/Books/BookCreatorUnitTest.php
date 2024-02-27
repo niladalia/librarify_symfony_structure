@@ -22,7 +22,6 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class BookCreatorUnitTest extends KernelTestCase
 {
-
     private $fileUploader;
     private $bookRep;
     private $updateBookAuthor;
@@ -65,12 +64,11 @@ class BookCreatorUnitTest extends KernelTestCase
           per aixó tindria que cambiar l'estructura de BookDto per a que contingués un id entre altres coses.
         */
         #$this->shouldSave($course);
-        
     }
 
     public function test_it_creates_a_full_book()
     {
-        $author = AuthorMother::create(Uuid::uuid4());        
+        $author = AuthorMother::create(Uuid::uuid4());
 
         $bookDto = new BookDto(
             "Title",
@@ -112,7 +110,6 @@ class BookCreatorUnitTest extends KernelTestCase
           per aixó tindria que cambiar l'estructura de BookDto per a que contingués un id entre altres coses.
         */
         #$this->shouldSave($course);
-        
     }
 
     public function test_it_throws_exception_when_invalid_author()

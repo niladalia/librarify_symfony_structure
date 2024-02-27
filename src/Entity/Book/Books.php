@@ -9,19 +9,19 @@ use Symfony\Component\Validator\Constraints\Collection;
 
 final class Books extends ArrayCollection
 {
-	public function __construct(Book ...$books)
-	{
-		parent::__construct($books);
-	}
-    
-	public function toArray()
-	{
-		$books = [];
+    public function __construct(Book ...$books)
+    {
+        parent::__construct($books);
+    }
 
-		foreach ($this as $book) {
-			$books[] = $book->toArray();
+    public function toArray()
+    {
+        $books = [];
+
+        foreach ($this as $book) {
+            $books[] = $book->toArray();
         }
 
-		return $books;
-	}
+        return $books;
+    }
 }

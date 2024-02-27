@@ -7,23 +7,24 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 final class Categories extends ArrayCollection
 {
-	public function __construct(Category ...$categories)
-	{
-		parent::__construct($categories);
-	}
-    
-	protected function type(): string
-	{
-		return Category::class;
-	}
+    public function __construct(Category ...$categories)
+    {
+        parent::__construct($categories);
+    }
 
-	public function toArray(){
-		$categories = [];
+    protected function type(): string
+    {
+        return Category::class;
+    }
 
-		foreach ($this as $category) {
-			$categories[] = $category->toArray();
+    public function toArray()
+    {
+        $categories = [];
+
+        foreach ($this as $category) {
+            $categories[] = $category->toArray();
         }
 
-		return $categories;
-	}
+        return $categories;
+    }
 }

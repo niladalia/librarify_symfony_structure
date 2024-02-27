@@ -28,7 +28,6 @@ class AuthorController extends AbstractController
 
     public function post(HttpFoundationRequest $request, AuthorCreator $author_creator): Response
     {
-
         $params = json_decode($request->getContent(), true);
         $author = $author_creator(
             new AuthorDto($params['name'])

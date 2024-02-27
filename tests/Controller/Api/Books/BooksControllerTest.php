@@ -2,7 +2,6 @@
 
 namespace App\Test\Controller\Api;
 
-
 use App\Model\Exception\Author\AuthorNotFound;
 use App\Repository\AuthorRepository;
 use App\Service\FileUploaderLocal;
@@ -15,7 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class BooksControllerTest extends WebTestCase
 {
-    
     public function testBookFinders()
     {
         #$this->markTestSkipped( 'PHPUnit will skip this test method' );
@@ -28,9 +26,8 @@ class BooksControllerTest extends WebTestCase
 
     public function testCreateComplexBookSuccess()
     {
-
         $client = static::createClient();
-        
+
         // Persistim un autor en BD perque pugui adjuntar el book a un author existent
         $author = AuthorMother::create(Uuid::fromString("59aa8278-bd4a-4895-a9e1-5684c89a3627"));
         $authorRep = static::getContainer()->get(AuthorRepository::class);
@@ -52,7 +49,7 @@ class BooksControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    
+
     public function testCreateSimpleBookSuccess()
     {
         $client = static::createClient();
@@ -93,7 +90,6 @@ class BooksControllerTest extends WebTestCase
 
     public function testExpectAuthorNotFound()
     {
-
         $client = static::createClient();
         $client->request(
             'POST',
@@ -106,11 +102,8 @@ class BooksControllerTest extends WebTestCase
             ['CONTENT_TYPE' => 'application/json', "HTTP_X-AUTH-TOKEN" => 'Librarify'],
             ''
         );
-        
+
         $this->assertEquals(400, $client->getResponse()->getStatusCode());
-#        $this->expectException(AuthorNotFound::class);
+        #        $this->expectException(AuthorNotFound::class);
     }
-
-
-
 }

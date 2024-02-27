@@ -13,7 +13,6 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class BookCreator
 {
-
     public function __construct(
         private FileUploaderInterface $fileUploader,
         private BookRepository $book_rep,
@@ -34,7 +33,6 @@ class BookCreator
 
     public function __invoke(BookDto $bookDto): Book
     {
-
         $author = $bookDto->author_id ? ($this->updateBookAuthor)($bookDto->author_id) : null;
         $filename = $bookDto->base64Image ? $this->fileUploader->uploadFile($bookDto) : null;
 
@@ -47,7 +45,7 @@ class BookCreator
         );
         $this->book_rep->save($book);
 
-        /* 
+        /*
          Aquí llançem tots els events de domini que haguem creat en el domini.
          $this->eventDispatcher->dispatch(...$book->pullDomainEvents());
         */

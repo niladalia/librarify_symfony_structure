@@ -9,7 +9,6 @@ use Ramsey\Uuid\UuidInterface;
 
 class BookDto
 {
-
     public function __construct(
         public ?string $title = null,
         public ?string $base64Image = null,
@@ -17,8 +16,7 @@ class BookDto
         public ?string $author_id = null,
         public ?int $score = null,
         public ?string $description = null
-    )
-    {
+    ) {
         $this->title = $title;
         $this->base64Image = $base64Image;
         $this->author_id = $author_id;

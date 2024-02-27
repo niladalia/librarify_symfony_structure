@@ -11,11 +11,11 @@ use Ramsey\Uuid\UuidInterface;
 
 final class AuthorMother
 {
-    public static function create(?UuidInterface $id = null, ?AuthorName $name = null): Author {
+    public static function create(?UuidInterface $id = null, ?AuthorName $name = null): Author
+    {
         return new Author(
             $id ?? Uuid::uuid4(),
             $name ?? new AuthorName(),
         );
     }
-
 }

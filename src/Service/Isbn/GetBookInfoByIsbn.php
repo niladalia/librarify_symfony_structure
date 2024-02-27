@@ -6,7 +6,7 @@ use App\Interfaces\HttpClientInterface;
 use App\Model\Dto\Isbn\IsbnDto;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class BookFinderInfoByIsbn
+class GetBookInfoByIsbn
 {
     private $httpClient;
 

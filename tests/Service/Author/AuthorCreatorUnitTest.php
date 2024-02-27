@@ -28,7 +28,7 @@ class AuthorCreatorUnitTest extends KernelTestCase
 
     public function test_it_creates_an_author()
     {
-       # $this->markTestSkipped('PHPUnit will skip this test method');  
+        # $this->markTestSkipped('PHPUnit will skip this test method');
         $authorDto = new AuthorDto(
             "J.K. Rowling"
         );
@@ -39,12 +39,11 @@ class AuthorCreatorUnitTest extends KernelTestCase
         ->willReturnCallback(function (Author $authorCallback) {
             return $authorCallback;
         });
-        
+
         $author = $this->authorCreator->__invoke($authorDto);
 
         $this->assertEquals("J.K. Rowling", $author->getName()->getValue());
         $this->assertInstanceOf(Author::class, $author);
-
     }
 
     public function test_it_throws_exception_when_data_is_invalid()
@@ -54,6 +53,5 @@ class AuthorCreatorUnitTest extends KernelTestCase
         $this->expectException(InvalidArgument::class);
 
         $this->authorCreator->__invoke($authorDto);
-      
     }
 }

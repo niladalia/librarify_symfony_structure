@@ -4,7 +4,6 @@ namespace App\Controller\Api;
 
 use App\Form\Model\BookDto;
 use App\Form\Type\BookFormType;
-use App\Model\Responses\BookResponse;
 use App\Repository\BookRepository;
 use App\Service\Book\BookCreator;
 use App\Service\Book\BookEditor;
@@ -21,11 +20,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
+
 //TEst
 class BooksController extends AbstractController
 {
-
-    public function __construct(private BookRepository $book_rep,private FormFactoryInterface $formFactory)
+    public function __construct(private BookRepository $book_rep, private FormFactoryInterface $formFactory)
     {
         $this->book_rep = $book_rep;
         $this->formFactory = $formFactory;
@@ -44,7 +43,7 @@ class BooksController extends AbstractController
     }
 
     public function get_by_id(string $id, BookFinder $bookFinder): Response
-    {   
+    {
         $result = $bookFinder->__invoke($id);
 
         $book = $result->toArray();
@@ -61,7 +60,7 @@ class BooksController extends AbstractController
     */
     public function post(Request $request, BookCreator $bookCreator)
     {
-        /* 
+        /*
            DTO :
            Utilitzem un objecte DTO ja que tenim que treballar amb el camp base64Image.
            Per estalviar-nos tenir que crearlo a la BD o al Entity, creem el objecte DTO

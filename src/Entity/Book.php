@@ -131,20 +131,20 @@ class Book
         return $this;
     }
 
-    public function toArray(){
-
+    public function toArray()
+    {
         $categories =  new Categories(...$this->getCategories());
-         
+
         return [
-            'id' => $this->getId()->serialize(), 
+            'id' => $this->getId()->serialize(),
             'title' => $this->getTitle()->getValue(),
             'score' => $this->getScore()->getValue(),
             'description' => $this->getDescription()->getValue(),
             'categories' => $categories->toArray(),
-            'author' => $this->getAuthor()? $this->getAuthor()->toArray() : null
+            'author' => $this->getAuthor() ? $this->getAuthor()->toArray() : null
         ];
     }
-    
+
     public function getPages(): ?int
     {
         return $this->pages;

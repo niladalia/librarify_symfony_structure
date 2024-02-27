@@ -88,7 +88,7 @@ class BookEditor
         }
 
         ($this->updateBookCategory)($original_categories_dto, $bookDto, $book);
-        $new_author = $bookDto->author_id ?  ($this->updateBookAuthor)($bookDto->author_id, $book) : null;
+        $new_author = $bookDto->author_id ? ($this->updateBookAuthor)($bookDto->author_id, $book) : null;
         $book->update(
             new Title($bookDto->title),
             $bookDto->base64Image ? $this->fileUploader->uploadFile($bookDto) : null,

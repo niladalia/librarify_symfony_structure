@@ -20,7 +20,7 @@ class Author
 
     private Collection $books;
 
-    public function __construct(UuidInterface $uuid,  ?AuthorName $name = new AuthorName())
+    public function __construct(UuidInterface $uuid, ?AuthorName $name = new AuthorName())
     {
         $this->id = $uuid;
         $this->name = $name;
@@ -74,8 +74,9 @@ class Author
         return $this;
     }
 
-    public function toArray(){
-        return  [
+    public function toArray()
+    {
+        return [
             "id" => $this->getId()->serialize(),
             "name" => $this->getName()->getValue()
         ];
