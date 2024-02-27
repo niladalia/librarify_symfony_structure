@@ -2,6 +2,7 @@
 
 namespace App\Service\Book;
 
+use App\Entity\Book;
 use App\Entity\Book\Description;
 use App\Entity\Book\Score;
 use App\Entity\Book\Title;
@@ -11,6 +12,7 @@ use App\Form\Model\CategoryDto;
 use App\Repository\BookRepository;
 use App\Form\Type\BookFormType;
 use App\Interfaces\FileUploaderInterface;
+use App\Model\Exception\Generic\InvalidData;
 use App\Repository\AuthorRepository;
 use App\Repository\CategoryRepository;
 use App\Service\Category\CategoryCreator;
@@ -41,7 +43,7 @@ class BookEditor
         $this->updateBookAuthor = $updateBookAuthor;
     }
 
-    public function __invoke(Request $request, string $id): array
+    public function __invoke(Request $request, string $id): Book
     {
         $book = ($this->BookFinder)($id);
 
@@ -80,13 +82,9 @@ class BookEditor
         $form = $this->formFactory->create(BookFormType::class, $bookDto);
         $form->submit($content);
 
-        if (!$form->isSubmitted()) {
-            return [null, 'Bad parameters!'];
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            InvalidData::throw("Object is not valid");
         }
-        if (!$form->isValid()) {
-            return [null, "Data is not valid"];
-        }
-
         ($this->updateBookCategory)($original_categories_dto, $bookDto, $book);
         $new_author = $bookDto->author_id ? ($this->updateBookAuthor)($bookDto->author_id, $book) : null;
         $book->update(
@@ -97,8 +95,6 @@ class BookEditor
             new Score($bookDto->score)
         );
         $this->book_rep->save($book);
-
-        $serialized_book = $this->book_rep->returnBookSerialized($book);
-        return [$serialized_book, null];
+        return $book;
     }
 }

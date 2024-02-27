@@ -14,7 +14,7 @@ book_controller_get:
     methods:  [GET] 
 book_controller_get_id:
     path: /api/books/{id}
-    controller: App\Controller\Api\BooksController::get_by_id
+    controller: App\Controller\Api\BooksController::getById
     methods:  [GET]
 #    format: json
 #    requirements:

@@ -7,7 +7,7 @@ use App\Model\Exception\Author\AuthorNotFound;
 use App\Repository\AuthorRepository;
 use Ramsey\Uuid\Uuid;
 
-class GetAuthor
+class AuthorFinder
 {
     private $author_rep;
 

@@ -4,12 +4,12 @@ namespace App\Service\Book;
 
 use App\Entity\Author;
 use App\Entity\Book;
-use App\Service\Author\GetAuthor;
+use App\Service\Author\AuthorFinder;
 
 class UpdateBookAuthor
 {
     private $getAuthor;
-    public function __construct(GetAuthor $getAuthor)
+    public function __construct(AuthorFinder $getAuthor)
     {
         $this->getAuthor = $getAuthor;
     }

@@ -7,30 +7,26 @@ use App\Entity\Book\Description;
 use App\Entity\Book\Score;
 use App\Entity\Book\Title;
 use App\Repository\BookRepository;
-use App\Interfaces\FileUploaderInterface;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 class BookFieldUpdater
 {
     private $book_rep;
-    private $BookFinder;
+    private $bookFinder;
     private $updateBookAuthor;
 
     public function __construct(
         BookRepository $book_rep,
-        BookFinder $BookFinder,
+        bookFinder $bookFinder,
         UpdateBookAuthor $updateBookAuthor
     ) {
         $this->book_rep = $book_rep;
-        $this->BookFinder = $BookFinder;
+        $this->bookFinder = $bookFinder;
         $this->updateBookAuthor = $updateBookAuthor;
     }
 
-    public function __invoke(Request $request, string $id): Book
+    public function __invoke(array $data, string $id): Book
     {
-        $book = ($this->BookFinder)($id);
-        $data = json_decode($request->getContent(), true);
+        $book = ($this->bookFinder)($id);
 
         if (\array_key_exists('score', $data)) {
             $book->setScore(new Score($data['score']));

@@ -131,7 +131,7 @@ class Book
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $categories =  new Categories(...$this->getCategories());
 

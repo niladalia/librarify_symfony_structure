@@ -9,13 +9,11 @@ use App\Entity\Book\Score;
 use App\Entity\Book\Title;
 use App\Form\Model\BookDto;
 use App\Repository\BookRepository;
-use App\Service\Book\UpdateBookAuthor;
 use App\Interfaces\FileUploaderInterface;
 use App\Model\Exception\Author\AuthorNotFound;
+use App\Service\Author\AuthorFinder;
 use App\Service\Book\BookCreator;
 use App\Tests\Mother\AuthorMother;
-use App\Tests\Mother\BookMother;
-use PhpParser\Node\Expr\Instanceof_;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -24,7 +22,7 @@ class BookCreatorUnitTest extends KernelTestCase
 {
     private $fileUploader;
     private $bookRep;
-    private $updateBookAuthor;
+    private $bookFinder;
     private $eventDispatcher;
     private $bookCreator;
 
@@ -34,13 +32,13 @@ class BookCreatorUnitTest extends KernelTestCase
 
         $this->fileUploader = $this->createMock(FileUploaderInterface::class);
         $this->bookRep = $this->createMock(BookRepository::class);
-        $this->updateBookAuthor = $this->createMock(UpdateBookAuthor::class);
+        $this->bookFinder = $this->createMock(AuthorFinder::class);
         $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
         $this->bookCreator = new BookCreator(
             $this->fileUploader,
             $this->bookRep,
-            $this->updateBookAuthor,
+            $this->bookFinder,
             $this->eventDispatcher
         );
     }
@@ -58,12 +56,6 @@ class BookCreatorUnitTest extends KernelTestCase
 
         $this->assertInstanceOf(Book::class, $book);
         $this->assertEquals("Title", $book->getTitle()->getValue());
-
-        /*
-          La forma més polida seria fer-ho com en el test CreateCourseCommandHandlerTest de Codely, pero
-          per aixó tindria que cambiar l'estructura de BookDto per a que contingués un id entre altres coses.
-        */
-        #$this->shouldSave($course);
     }
 
     public function test_it_creates_a_full_book()
@@ -80,7 +72,7 @@ class BookCreatorUnitTest extends KernelTestCase
         );
 
 
-        $this->updateBookAuthor->expects(self::exactly(1))
+        $this->bookFinder->expects(self::exactly(1))
         ->method('__invoke')
         ->with($author->id->serialize())
         ->willReturn($author);
@@ -105,11 +97,6 @@ class BookCreatorUnitTest extends KernelTestCase
         $this->assertEquals(new Score(3), $book->getScore());
         $this->assertEquals(new Description("Description"), $book->getDescription());
         $this->assertEquals($author, $book->getAuthor());
-        /*
-          La forma més polida seria fer-ho com en el test CreateCourseCommandHandlerTest de Codely, pero
-          per aixó tindria que cambiar l'estructura de BookDto per a que contingués un id entre altres coses.
-        */
-        #$this->shouldSave($course);
     }
 
     public function test_it_throws_exception_when_invalid_author()
@@ -125,7 +112,7 @@ class BookCreatorUnitTest extends KernelTestCase
             null
         );
 
-        $this->updateBookAuthor->expects(self::exactly(1))
+        $this->bookFinder->expects(self::exactly(1))
         ->method('__invoke')
         ->with("50763846-6680-473a-abd3-6f30c4ab8aae")
         ->willReturn(null);

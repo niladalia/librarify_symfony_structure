@@ -28,6 +28,7 @@ class BookRepository extends ServiceEntityRepository
     public function find_all(): Books
     {
         $all_books = $this->findBy([]);
+
         return new Books(...$all_books);
     }
 

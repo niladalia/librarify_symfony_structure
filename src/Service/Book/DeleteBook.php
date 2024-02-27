@@ -21,17 +21,17 @@ class DeleteBook
     public function __construct(
         private BookRepository $bookRep,
         private DeleteFile $file_deleter,
-        private BookFinder $BookFinder
+        private BookFinder $bookFinder
     ) {
         $this->bookRep = $bookRep;
         $this->file_deleter = $file_deleter;
-        $this->BookFinder = $BookFinder;
+        $this->bookFinder = $bookFinder;
     }
 
 
     public function __invoke(string $id): void
     {
-        $book = ($this->BookFinder)($id);
+        $book = ($this->bookFinder)($id);
         if (!$book) {
             BookNotFound::throw();
         }

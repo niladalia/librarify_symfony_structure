@@ -14,7 +14,7 @@ final class Books extends ArrayCollection
         parent::__construct($books);
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $books = [];
 

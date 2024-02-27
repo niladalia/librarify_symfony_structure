@@ -16,7 +16,7 @@ class ApiExceptionListener
         $exception = $event->getThrowable();
 
         if (!$exception instanceof HttpExceptionInterface) {
-            return Response::HTTP_INTERNAL_SERVER_ERROR;
+            Response::HTTP_INTERNAL_SERVER_ERROR;
         }
 
         $code = null;

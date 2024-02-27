@@ -17,7 +17,7 @@ final class Categories extends ArrayCollection
         return Category::class;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $categories = [];
 
