@@ -1,0 +1,1 @@
+Aquest repo es nomes per a revisar un projecte Symfony amb l'estructura de carpetes de Symfony tradicional. Esta bastant ben fet pero hi han coses que es podrien pulir. El repo library_ddd_structure sí que esta pulit i amb estructura DDD

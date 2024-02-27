@@ -18,7 +18,7 @@ services:
         volumes:
             - ./:/var/www/librarify/
         ports:
-            - 81:80
+            - 82:80
         networks:
             - symfony
     db:
@@ -32,7 +32,7 @@ services:
             MYSQL_USER: nil
             MYSQL_PASSWORD: chopin
         ports:
-            - 3307:3306
+            - 3308:3306
         networks:
             - symfony
 

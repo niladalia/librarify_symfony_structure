@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Author;
+use App\Entity\Author\Authors;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,39 +22,14 @@ class AuthorRepository extends ServiceEntityRepository
         parent::__construct($registry, Author::class);
     }
 
-    public function findAllSerialized()
-    {
-        $author_array = [];
 
+    public function find_all(): Authors
+    {
         $all_authors = $this->findBy([]);
 
-        foreach ($all_authors as $author) {
-            $author_array[] = $this->returnBookSerialized($author);
-        };
-
-        return $author_array;
+        return new Authors(...$all_authors);
     }
 
-    public function returnBookSerialized(Author $author)
-    {
-        $books_array = $this->BookFindersSerializer($author);
-
-        return [
-             'id' => $author->getId(),
-             'name' => $author->getName(),
-             'books' => $books_array
-        ];
-    }
-
-    private function BookFindersSerializer(Author $author): array
-    {
-        $books = $author->BookFinders()->getValues();
-        $books_array = [];
-        foreach ($books as $book) {
-            $books_array[] = ['id' => $book->getId(), 'title' => $book->getTitle()];
-        }
-        return $books_array;
-    }
 
     public function save(Author $author): Author
     {
